@@ -1,0 +1,27 @@
+{
+    "name": "brainster-library",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "watch": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://gitlab.com/Kartinov/brainsterprojects_dimchekartinovfs6.git"
+    },
+    "author": "Dimche Kartinov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://gitlab.com/Kartinov/brainsterprojects_dimchekartinovfs6/issues"
+    },
+    "homepage": "https://gitlab.com/Kartinov/brainsterprojects_dimchekartinovfs6#readme",
+    "devDependencies": {
+        "tailwindcss": "^3.0.24"
+    },
+    "dependencies": {
+        "@tailwindcss/aspect-ratio": "^0.4.0",
+        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/typography": "^0.5.2"
+    }
+}
