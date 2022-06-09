@@ -1,10 +1,9 @@
 <div class="bg-white">
     <div>
         <!--
-      Mobile filter dialog
-
-      Off-canvas filters for mobile, show/hide based on off-canvas filters state.
-    -->
+            Mobile filter dialog
+            Off-canvas filters for mobile, show/hide based on off-canvas filters state.
+         -->
         <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
             <!--
         Off-canvas menu backdrop, show/hide based on off-canvas menu state.
