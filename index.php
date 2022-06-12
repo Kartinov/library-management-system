@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Logic for index.view.php here
 

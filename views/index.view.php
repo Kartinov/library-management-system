@@ -58,7 +58,7 @@
         </div>
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative z-10 flex items-baseline justify-between py-6">
+            <div class="relative z-10 flex lg:hidden items-baseline justify-between py-6">
                 <h1 class="text-4xl font-extrabold tracking-tight text-gray-900"></h1>
 
                 <!-- Button Open Filter -->
@@ -108,11 +108,30 @@
 
                     <!-- Product grid -->
                     <div class="lg:col-span-3">
-                        <!-- Replace with your content -->
-                        <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 lg:h-full">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, eaque.</div>
-                        <!-- /End replace -->
+                        <div class="grid grid-cols-2 gap-8 mt-8 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+
+                            <!-- Book Card -->
+                            <a href="#" class="flex flex-col items-center justify-center w-full max-w-2xl mx-auto duration-300 ease-in-out transition-transform transform hover:-translate-y-2">
+                                <img class="object-cover w-full rounded-md h-96 xl:h-80" src="https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg" alt="Book">
+
+                                <div class="w-full mt-2">
+                                    <h5 class="text-xl font-semibold text-grey-700">A milion to one</h5>
+                                    <div class="pt-2 mt-2 border-t-2 border-indigo-100">
+                                        <p class="text-sm font-medium tracking-widest text-gray-500 uppercase">Tony Faggioli</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-end w-full mt-3">
+                                    <p class="text-lg font-medium text-white bg-indigo-600 px-4 py-1 rounded-l-lg">Action</p>
+                                </div>
+                            </a>
+
+
+
+
+
+                        </div>
                     </div>
-                </div>
             </section>
         </main>
     </div>
