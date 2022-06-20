@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "watch": "npx tailwindcss -i ./resources/css/input.css -o ./public/css/output.css --watch"
+        "watch": "npx tailwindcss -i ./app/resources/css/input.css -o ./public/css/output.css --watch"
     },
     "repository": {
         "type": "git",

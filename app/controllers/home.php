@@ -9,4 +9,14 @@ class Home extends Controller
 
         $this->view('home/index', ['name' => $user->name]);
     }
+
+    public function login()
+    {
+        $this->view('home/login');
+    }
+
+    public function register()
+    {
+        $this->view('home/register');
+    }
 }
