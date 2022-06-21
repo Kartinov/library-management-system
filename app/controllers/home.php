@@ -14,10 +14,15 @@ class Home extends Controller
                 '
             )
             ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->join('categories', 'books.categorie_id', '=', 'categories.id');
+            ->join('categories', 'books.categorie_id', '=', 'categories.id')
+            ->get();
 
+        $categories = $this->model('Category')->orWhere(['is_archived', '=', 0])->get();
 
-        $this->view('home/index', ['books' => $books->get()]);
+        $this->view('home/index', [
+            'books' => $books,
+            'categories' => $categories
+        ]);
     }
 
     public function login()

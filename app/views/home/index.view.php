@@ -26,29 +26,12 @@
                     <form class="mt-4 border-t border-gray-200">
                         <div class="border-t border-gray-200 px-4 py-6">
                             <div class="space-y-6">
-                                <div class="flex items-center">
-                                    <input id="filter-mobile-category-0" name="category[]" value="management" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                    <label for="filter-mobile-category-0" class="ml-3 min-w-0 flex-1 text-gray-500"> Management </label>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <input id="filter-mobile-category-1" name="category[]" value="sale" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                    <label for="filter-mobile-category-1" class="ml-3 min-w-0 flex-1 text-gray-500"> Frontend </label>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <input id="filter-mobile-category-2" name="category[]" value="backend" type="checkbox" checked class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                    <label for="filter-mobile-category-2" class="ml-3 min-w-0 flex-1 text-gray-500"> Backend </label>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <input id="filter-mobile-category-3" name="category[]" value="data-science" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                    <label for="filter-mobile-category-3" class="ml-3 min-w-0 flex-1 text-gray-500"> Data Science </label>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <input id="filter-mobile-category-4" name="category[]" value="design" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                    <label for="filter-mobile-category-4" class="ml-3 min-w-0 flex-1 text-gray-500"> Design </label>
+                                <!-- Checkbox Mobile -->
+                                <div>
+                                    <label class="flex items-center ml-3 text-sm text-gray-600">
+                                        <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500" value="management">
+                                        Management
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -77,30 +60,17 @@
                             <!-- Filter section, show/hide based on section state. -->
                             <div class="" id="filter-section-1">
                                 <div class="space-y-4">
-                                    <div class="flex items-center">
-                                        <input id="filter-category-0" name="category[]" value="management" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-category-0" class="ml-3 text-sm text-gray-600"> Management </label>
-                                    </div>
 
-                                    <div class="flex items-center">
-                                        <input id="filter-category-1" name="category[]" value="frontend" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-category-1" class="ml-3 text-sm text-gray-600"> Frontend </label>
-                                    </div>
+                                    <!-- List all categories from database -->
+                                    <?php foreach ($data['categories'] as $category) : ?>
+                                        <div>
+                                            <label class="flex items-center ml-3 capitalize text-sm text-gray-600">
+                                                <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500" value="management">
+                                                <?= $category->name ?>
+                                            </label>
+                                        </div>
+                                    <?php endforeach ?>
 
-                                    <div class="flex items-center">
-                                        <input id="filter-category-2" name="category[]" value="backend" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-category-2" class="ml-3 text-sm text-gray-600"> Backend </label>
-                                    </div>
-
-                                    <div class="flex items-center">
-                                        <input id="filter-category-3" name="category[]" value="data-science" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-category-3" class="ml-3 text-sm text-gray-600"> Data Science </label>
-                                    </div>
-
-                                    <div class="flex items-center">
-                                        <input id="filter-category-4" name="category[]" value="design" type="checkbox" class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-category-4" class="ml-3 text-sm text-gray-600"> Design </label>
-                                    </div>
                                 </div>
                             </div>
                         </div>
