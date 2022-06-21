@@ -8,6 +8,8 @@ abstract class Model extends Connection
 
     protected array  $orWhere = [];
 
+    protected array $whereIn = [];
+
     protected array  $joins = [];
 
     protected string $table;
@@ -136,6 +138,13 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function whereIn(array $conditions)
+    {
+        $this->whereIn[] = $conditions;
+
+        return $this;
+    }
+
     public function selectRaw(string $raw)
     {
         $this->selectRaw = $raw;
@@ -218,6 +227,11 @@ abstract class Model extends Connection
                 $query .= sprintf(' %s %s :%s', $condition[0], $condition[1], str_replace('.', '_', $condition[0]));
                 $count++;
             }
+        } elseif (count($this->whereIn)) {
+
+            $selectedCategories = implode(',', $this->whereIn[0][1]);
+
+            $query .= "WHERE {$this->whereIn[0][0]} IN ({$selectedCategories})";
         }
 
         $query .= ';';
@@ -230,8 +244,10 @@ abstract class Model extends Connection
             }
 
             $stmt->execute();
-        } else {
+        } elseif ($this->where) {
             $stmt->execute($this->where);
+        } else {
+            $stmt->execute();
         }
 
         return $stmt->fetchAll(PDO::FETCH_OBJ);

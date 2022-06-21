@@ -53,19 +53,19 @@
             </div>
 
             <section class="pt-6 pb-24">
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-x-8 gap-y-10">
                     <!-- Filters -->
                     <form class="hidden lg:block">
                         <div class="py-6">
                             <!-- Filter section, show/hide based on section state. -->
-                            <div class="" id="filter-section-1">
-                                <div class="space-y-4">
+                            <div>
+                                <div class="space-y-6">
 
                                     <!-- List all categories from database -->
                                     <?php foreach ($data['categories'] as $category) : ?>
                                         <div>
                                             <label class="flex items-center ml-3 capitalize text-sm text-gray-600">
-                                                <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500" value="management">
+                                                <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 category-select category" value="<?= $category->id ?>">
                                                 <?= $category->name ?>
                                             </label>
                                         </div>
@@ -76,25 +76,12 @@
                         </div>
                     </form>
 
-                    <!-- Product grid -->
-                    <div class="lg:col-span-3">
-                        <div class="grid grid-cols-2 gap-8 mt-8 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
+                    <!-- Wrapper where all the books are listed-->
+                    <div class="lg:col-span-4">
+                        <div id="books-wrapper" class="grid grid-cols-2 gap-12 mt-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
 
-                            <!-- Book Card -->
-                            <a href="#" class="flex flex-col items-center justify-center w-full max-w-2xl mx-auto duration-300 ease-in-out transition-transform transform hover:-translate-y-2">
-                                <img class="object-cover w-full rounded-md h-96 xl:h-80" src="https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg" alt="Book">
+                            <!-- Books here -->
 
-                                <div class="w-full mt-2">
-                                    <h5 class="text-xl font-semibold text-grey-700">A milion to one</h5>
-                                    <div class="pt-2 mt-2 border-t-2 border-indigo-100">
-                                        <p class="text-sm font-medium tracking-widest text-gray-500 uppercase">Tony Faggioli</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-end w-full mt-3">
-                                    <p class="text-lg font-medium text-white bg-indigo-600 px-4 py-1 rounded-l-lg">Action</p>
-                                </div>
-                            </a>
                         </div>
                     </div>
             </section>
