@@ -57,13 +57,13 @@
                     <!-- Filters -->
                     <form class="hidden lg:block">
                         <div class="py-6">
-                            <!-- Filter section, show/hide based on section state. -->
+
                             <div>
                                 <div class="space-y-6">
 
                                     <!-- List all categories from database -->
                                     <?php foreach ($data['categories'] as $category) : ?>
-                                        <div>
+                                        <div class="category-checkbox -ml-96">
                                             <label class="flex items-center ml-3 capitalize text-sm text-gray-600">
                                                 <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 category-select category" value="<?= $category->id ?>">
                                                 <?= $category->name ?>

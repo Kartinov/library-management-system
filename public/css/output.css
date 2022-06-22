@@ -677,6 +677,10 @@ select {
   left: 0px;
 }
 
+.left-6 {
+  left: 1.5rem;
+}
+
 .z-40 {
   z-index: 40;
 }
@@ -740,6 +744,30 @@ select {
 
 .mt-3 {
   margin-top: 0.75rem;
+}
+
+.-mr-10 {
+  margin-right: -2.5rem;
+}
+
+.-mr-40 {
+  margin-right: -10rem;
+}
+
+.-ml-10 {
+  margin-left: -2.5rem;
+}
+
+.-ml-20 {
+  margin-left: -5rem;
+}
+
+.-ml-40 {
+  margin-left: -10rem;
+}
+
+.-ml-96 {
+  margin-left: -24rem;
 }
 
 .block {
