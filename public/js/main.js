@@ -4,9 +4,7 @@ $(function () {
 
     filterAndRenderBooks(); // on page visit render books
 
-    // show checkboxes
-
-    $('.category-checkbox').animate({ marginLeft: 0 }, 700);
+    $('.category-checkbox').animate({ marginLeft: 0 }, 700); // show checkboxes
 });
 
 function filterAndRenderBooks() {
