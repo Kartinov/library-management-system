@@ -2,29 +2,64 @@
 
 class Books extends Controller
 {
-    public function index($name = '')
+    private Book $bookModel;
+
+    public function __construct()
     {
-        $books = $this->model('Book')
+        $this->bookModel = $this->model('Book');
+    }
+
+    public function index()
+    {
+    }
+
+    /**
+     * Shows a book
+     * 
+     * @param int bookId The ID of the book to show.
+     */
+    public function show($bookId = null)
+    {
+        if (!is_numeric($bookId)) {
+            redirect();
+        }
+
+        $bookExists = $this->bookModel
+            ->where(['id' => $bookId])
+            ->exists();
+
+        if (!$bookExists) {
+            redirect();
+        }
+
+        $this->bookModel
+            ->clearWhere()
+            ->orWhere(['books.id', '=', $bookId]);
+
+        $this->bookModel
             ->selectRaw(
                 'books.*,
-                 authors.first_name as a_first_name,
-                 authors.last_name as a_last_name,
-                 authors.bio as a_bio,
-                 categories.name as c_name
-                '
+                     authors.first_name as a_first_name,
+                     authors.last_name as a_last_name,
+                     categories.name as c_name
+                     '
             )
             ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->join('categories', 'books.categorie_id', '=', 'categories.id')
-            ->get();
+            ->join('categories', 'books.categorie_id', '=', 'categories.id');
 
-        echo $books;
+        $book = $this->bookModel->get();
+
+        $this->view('book/show', ['book' => $book]);
     }
 
 
+    /**
+     * It fetches books from the database and returns them as JSON.
+     */
     public function fetchBooks()
     {
         if (isset($_POST['action'])) {
-            $book = $this->model('Book')
+            $this->bookModel
                 ->selectRaw(
                     'books.*,
                 authors.first_name as a_first_name,
@@ -36,12 +71,12 @@ class Books extends Controller
                 ->join('categories', 'books.categorie_id', '=', 'categories.id');
 
             if (isset($_POST['checkedCategories'])) {
-                $book->whereIn([
+                $this->bookModel->whereIn([
                     'categorie_id', $_POST['checkedCategories'] // [1, 2, 3, 4]
                 ]);
             }
 
-            echo json_encode($book->get());
+            echo json_encode($this->bookModel->get());
         }
     }
 }

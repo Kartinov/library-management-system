@@ -2,34 +2,28 @@
 
 class Home extends Controller
 {
-    public function index($name = '')
+    public function index()
     {
-        $books = $this->model('Book')
-            ->selectRaw(
-                'books.*,
-                 authors.first_name as a_first_name,
-                 authors.last_name as a_last_name,
-                 authors.bio as a_bio,
-                 categories.name as c_name
-                '
-            )
-            ->join('authors', 'books.author_id', '=', 'authors.id')
-            ->join('categories', 'books.categorie_id', '=', 'categories.id')
+        $categories = $this->model('Category')
+            ->where(['is_archived' => 0])
             ->get();
 
-        $categories = $this->model('Category')->orWhere(['is_archived', '=', 0])->get();
-
         $this->view('home/index', [
-            'books' => $books,
             'categories' => $categories
         ]);
     }
 
+    /**
+     * It loads the login view.
+     */
     public function login()
     {
         $this->view('home/login');
     }
 
+    /**
+     * It loads the register view.
+     */
     public function register()
     {
         $this->view('home/register');

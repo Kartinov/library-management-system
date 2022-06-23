@@ -37,7 +37,7 @@ function renderBooks(booksData) {
 
     $.each(booksData, function (index, book) {
         let bookHtml = `
-            <a href="#" class="book-card opacity-0 flex flex-col items-center justify-center w-full max-w-2xl mx-auto duration-300 ease-in-out transition-transform transform hover:-translate-y-2">
+            <a href="./books/show/${book.id}" class="book-card opacity-0 flex flex-col items-center justify-center w-full max-w-2xl mx-auto duration-300 ease-in-out transition-transform transform hover:-translate-y-2">
                       <img class="object-cover w-full rounded-md h-64 xl:h-60" src="${book.image_url}" alt="${book.title}">
 
                       <div class="w-full mt-2">

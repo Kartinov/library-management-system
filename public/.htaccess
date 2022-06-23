@@ -1,8 +1,6 @@
 Options -MultiViews
 RewriteEngine On
 
-RewriteBase /Brainster/Brainster_Projects/brainsterprojects_dimchekartinovfs6/public/
-
 RewriteCond  %{REQUEST_FILENAME} !-d
 RewriteCond  %{REQUEST_FILENAME} !-f
 
