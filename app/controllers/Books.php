@@ -47,7 +47,7 @@ class Books extends Controller
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->join('categories', 'books.categorie_id', '=', 'categories.id');
 
-        $book = $this->bookModel->get();
+        $book = $this->bookModel->get()[0];
 
         $this->view('book/show', ['book' => $book]);
     }

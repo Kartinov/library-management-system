@@ -7,7 +7,7 @@
                 <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
                 <p class="mt-2 text-center text-sm text-gray-600">
                     Don't have an account yet?
-                    <a href="./register.php" class="font-medium text-indigo-600 hover:text-indigo-500"> Sign Up </a>
+                    <a href="<?= route('home/register') ?>" class="font-medium text-indigo-600 hover:text-indigo-500"> Sign Up </a>
                 </p>
             </div>
             <form class="mt-8 space-y-6" action="#" method="POST">
