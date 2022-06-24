@@ -10,6 +10,8 @@ class App
 
     public function __construct()
     {
+        session_start();
+
         $url = $this->parseUrl();
 
         if ($url && file_exists('../app/controllers/' . $url[0] . '.php')) {

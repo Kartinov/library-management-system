@@ -2,7 +2,7 @@
 
 require_once '../app/core/database/Model.php';
 
-class Category extends Model
+class CategoryModel extends Model
 {
     protected string $table = 'categories';
 }

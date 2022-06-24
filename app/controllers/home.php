@@ -4,7 +4,7 @@ class Home extends Controller
 {
     public function index()
     {
-        $categories = $this->model('Category')
+        $categories = $this->model('CategoryModel')
             ->where(['is_archived' => 0])
             ->get();
 

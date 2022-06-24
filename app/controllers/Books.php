@@ -2,11 +2,11 @@
 
 class Books extends Controller
 {
-    private Book $bookModel;
+    private BookModel $bookModel;
 
     public function __construct()
     {
-        $this->bookModel = $this->model('Book');
+        $this->bookModel = $this->model('BookModel');
     }
 
     public function index()
@@ -58,6 +58,8 @@ class Books extends Controller
      */
     public function fetchBooks()
     {
+        postOnly();
+
         if (isset($_POST['action'])) {
             $this->bookModel
                 ->selectRaw(
