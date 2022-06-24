@@ -26,6 +26,25 @@ class Validator
         return $this->errors;
     }
 
+    public function validateLoginForm()
+    {
+        $this->validateInputs();
+
+        $this->allFieldsRequired();
+
+        return $this->errors;
+    }
+
+    public function allFieldsRequired()
+    {
+        foreach ($this->data as $field) {
+            if (empty($field)) {
+                $this->addError('required', 'All fields are required');
+                break;
+            }
+        }
+    }
+
     private function validateInputs()
     {
         foreach ($this->fields as $field) {
