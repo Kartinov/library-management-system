@@ -75,15 +75,6 @@ function session_has($name)
         : false;
 }
 
-// function session_remove($session_key = '')
-// {
-//     !empty($session_key)
-//         ? unset($_SESSION[$session_key])    
-//         : unset($_SESSION);
-
-//         sessi
-// }
-
 function session_get($session_name)
 {
     return $_SESSION[$session_name] ?? null;

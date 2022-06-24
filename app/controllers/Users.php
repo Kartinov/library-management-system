@@ -112,6 +112,15 @@ class Users extends Controller
                 session_put('user', $user);
                 redirect();
             }
+
+            session_put('errors', ['Invalid Email or Password Combination.']);
+            redirect('home/login');
         }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        redirect();
     }
 }
