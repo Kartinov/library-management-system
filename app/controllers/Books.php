@@ -49,7 +49,7 @@ class Books extends Controller
 
         $book = $this->bookModel->get()[0];
 
-        $this->view('book/show', ['book' => $book]);
+        $this->view('books/show', ['book' => $book]);
     }
 
 
@@ -80,5 +80,113 @@ class Books extends Controller
 
             echo json_encode($this->bookModel->get());
         }
+    }
+
+    public function table()
+    {
+        $books = $this->bookModel
+            ->selectRaw(
+                'books.*,
+                authors.first_name as a_first_name,
+                authors.last_name as a_last_name,
+                categories.name as c_name
+                '
+            )
+            ->join('authors', 'books.author_id', '=', 'authors.id')
+            ->join('categories', 'books.categorie_id', '=', 'categories.id')
+            ->get();
+
+        $this->view('books/table', ['books' => $books]);
+    }
+
+    public function create($bookId = null)
+    {
+        $categories = $this->model('CategoryModel')
+            ->where(['is_archived' => 0])
+            ->get();
+
+        $authors = $this->model('AuthorModel')
+            ->where(['is_archived' => 0])
+            ->get();
+
+        $action = 'create';
+
+        if (is_numeric($bookId)) {
+            $book = $this->bookModel->where(['id' => $bookId])->get()[0];
+
+            session_put('old', (array) $book);
+            $action = 'update';
+        }
+
+        $this->view('books/create', [
+            'categories' => $categories,
+            'authors' => $authors,
+            'action' => $action
+        ]);
+    }
+
+    public function store()
+    {
+        postOnly();
+
+        $data = [ // field to be validated
+            'title',
+            'image_url',
+            'author_id',
+            'categorie_id',
+            'num_of_pages',
+            'year_of_publication',
+        ];
+
+        $validation = new Validator($_POST, $data);
+
+        $errors = $validation->validateBookForm();
+
+        if (empty($errors)) {
+            $authorExists = $this->model('AuthorModel')
+                ->where(['id' => $_POST['author_id']])
+                ->exists();
+
+            $categoryExists = $this->model('CategoryModel')
+                ->where(['id' => $_POST['categorie_id']])
+                ->exists();
+
+            if (!$authorExists) {
+                $errors['author'] = 'category does not exists.';
+            }
+
+            if (!$categoryExists) {
+                $errors['category'] = 'category does not exists.';
+            }
+        }
+
+        if (!empty($errors)) {
+            session_put('errors', $errors);
+            session_put('old', $_POST);
+
+            redirect('books/create');
+        }
+
+        $executed = $this->bookModel->create($_POST);
+
+        if ($executed) {
+            session_put(
+                'success',
+                'You have successfully added a book!'
+            );
+
+            redirect('books/table');
+        }
+
+        session_put('errors', ['Something wrong happen, try again.']);
+        redirect('books/create');
+    }
+
+    public function delete($bookId)
+    {
+        $this->bookModel->delete('id', $bookId);
+
+        session_put('success', 'Book deleted.');
+        redirect('books/table');
     }
 }
