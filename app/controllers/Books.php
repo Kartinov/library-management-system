@@ -115,6 +115,7 @@ class Books extends Controller
             $book = $this->bookModel->where(['id' => $bookId])->get()[0];
 
             session_put('old', (array) $book);
+            session_put('bookId', $bookId);
             $action = 'update';
         }
 
@@ -188,5 +189,68 @@ class Books extends Controller
 
         session_put('success', 'Book deleted.');
         redirect('books/table');
+    }
+
+    public function update()
+    {
+        postOnly();
+
+        $data = [ // field to be validated
+            'title',
+            'image_url',
+            'author_id',
+            'categorie_id',
+            'num_of_pages',
+            'year_of_publication',
+        ];
+
+        $validation = new Validator($_POST, $data);
+
+        $errors = $validation->validateBookForm();
+
+        if (empty($errors)) {
+            $authorExists = $this->model('AuthorModel')
+                ->where(['id' => $_POST['author_id']])
+                ->exists();
+
+            $categoryExists = $this->model('CategoryModel')
+                ->where(['id' => $_POST['categorie_id']])
+                ->exists();
+
+            if (!$authorExists) {
+                $errors['author'] = 'category does not exists.';
+            }
+
+            if (!$categoryExists) {
+                $errors['category'] = 'category does not exists.';
+            }
+        }
+
+        if (!empty($errors)) {
+            session_put('errors', $errors);
+            session_put('old', $_POST);
+
+            redirect('books/create');
+        }
+
+        $data = $_POST;
+
+        $data['id'] = session_once('bookId');
+
+        $updated = $this->bookModel
+            ->where(['id' => $data['id']])
+            ->update($data);
+
+        if ($updated) {
+            session_put(
+                'success',
+                'You have successfully updated a book!'
+            );
+
+            redirect('books/table');
+        }
+
+        session_put('errors', ['Something wrong happen, try again.']);
+        redirect('books/create');
     }
 }

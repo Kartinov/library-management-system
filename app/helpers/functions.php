@@ -15,14 +15,6 @@ function dd($variable)
 }
 
 /**
- * If the request method is not POST, redirect.
- */
-function postOnly()
-{
-    if ($_SERVER['REQUEST_METHOD'] != 'POST') redirect();
-}
-
-/**
  * It takes a path and returns a URL
  * 
  * @param path The path to the file or directory.
@@ -117,4 +109,27 @@ function old($key)
     }
 
     return null;
+}
+
+/**
+ * If the request method is not POST, redirect.
+ */
+function postOnly()
+{
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') redirect();
+}
+
+function guestOnly()
+{
+    if (session_has('user')) redirect();
+}
+
+function authOnly()
+{
+    if (!session_has('user')) redirect();
+}
+
+function adminOnly()
+{
+    if (session_get('user')->role != 'admin') redirect();
 }

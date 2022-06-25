@@ -18,6 +18,8 @@ class Home extends Controller
      */
     public function login()
     {
+        guestOnly();
+
         $this->view('home/login');
     }
 
@@ -26,6 +28,8 @@ class Home extends Controller
      */
     public function register()
     {
+        guestOnly();
+
         $this->view('home/register');
     }
 }
