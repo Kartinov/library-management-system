@@ -68,6 +68,14 @@ class Categories extends Controller
     {
         $action = 'create';
 
+        if (is_numeric($categoryId)) {
+            $category = $this->categoryModel->where(['id' => $categoryId])->first();
+
+            session_put('old', (array) $category);
+            session_put('categoryId', $categoryId);
+            $action = 'update';
+        }
+
         $this->view('categories/create', [
             'action' => $action
         ]);
@@ -88,7 +96,6 @@ class Categories extends Controller
             redirect('categories/create');
         }
 
-
         $executed = $this->categoryModel->create($_POST);
 
         if ($executed) {
@@ -102,5 +109,38 @@ class Categories extends Controller
 
         session_put('errors', ['Something wrong happen, try again.']);
         redirect('categories/table');
+    }
+
+    public function update()
+    {
+        postOnly();
+
+        $validation = new Validator($_POST, ['name']);
+
+        $errors = $validation->validateCategoryForm();
+
+        if (!empty($errors)) {
+            session_put('errors', $errors);
+            session_put('old', $_POST);
+
+            redirect('categories/create');
+        }
+
+        $data = $_POST;
+
+        $data['id'] = session_once('categoryId');
+
+        $updated = $this->categoryModel
+            ->where(['id' => $data['id']])
+            ->update($data);
+
+        if ($updated) {
+            session_put(
+                'success',
+                'You have successfully updated an category!'
+            );
+
+            redirect('categories/table');
+        }
     }
 }

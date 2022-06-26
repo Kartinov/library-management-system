@@ -58,6 +58,17 @@ class Validator
         return $this->errors;
     }
 
+    public function validateAuthorForm()
+    {
+        $this->validateInputs();
+
+        $this->validateFirstName();
+        $this->validateLastName();
+        $this->validateBio();
+
+        return $this->errors;
+    }
+
     public function allFieldsRequired()
     {
         foreach ($this->data as $field) {
@@ -191,6 +202,17 @@ class Validator
             $this->addError('category', 'category name field cannot be empty');
         } elseif (strlen($val) < 3 || strlen($val) > 64) {
             $this->addError('category', 'category name must be 3-64 chars');
+        }
+    }
+
+    public function validateBio()
+    {
+        $val = trim($this->data['bio']);
+
+        if (empty($val)) {
+            $this->addError('bio', 'Author\'s biography cannot be empty');
+        } elseif (strlen($val) < 20 || strlen($val) > 256) {
+            $this->addError('category', 'Author\'s biography must be between 20-256 chars');
         }
     }
 
