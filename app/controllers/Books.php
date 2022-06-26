@@ -185,11 +185,11 @@ class Books extends Controller
                 ->exists();
 
             if (!$authorExists) {
-                $errors['author'] = 'category does not exists.';
+                $errors['author'] = 'Author does not exists.';
             }
 
             if (!$categoryExists) {
-                $errors['category'] = 'category does not exists.';
+                $errors['category'] = 'Category does not exists.';
             }
         }
 
