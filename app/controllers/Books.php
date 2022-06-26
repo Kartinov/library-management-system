@@ -62,11 +62,16 @@ class Books extends Controller
 
             $comments = $commentModel
                 ->clearWhere()
+                ->selectRaw('
+                     comments.*,
+                     users.first_name as u_first_name,
+                     users.last_name as u_last_name
+                ')
+                ->join('users', 'users.id', '=', 'comments.user_id')
                 ->where([
                     'is_approved' => 1,
                     'book_id' => $bookId
                 ])
-                ->join('users', 'user_id', '=', 'authors.id')
                 ->get();
         }
 

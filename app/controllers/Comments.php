@@ -44,7 +44,45 @@ class Comments extends Controller
         redirect("books/show/{$bookId}");
     }
 
-    public function delete()
+    public function delete($commentId, $bookId)
     {
+        $this->commentModel->delete('id', $commentId);
+
+        redirect("books/show/{$bookId}");
+    }
+
+    public function table()
+    {
+        $comments = $this->commentModel
+            ->selectRaw('
+            comments.*,
+            users.first_name as u_first_name,
+            users.last_name as u_last_name,
+            books.image_url,
+            books.title
+            ')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->join('books', 'books.id', '=', 'comments.book_id')
+            ->where(['is_approved' => 0])
+            ->get();
+
+        $this->view('comments/table', [
+            'comments' => $comments
+        ]);
+    }
+
+    public function approve($commentId)
+    {
+        $data = [
+            'id' => $commentId,
+            'is_approved' => 1
+        ];
+
+        $this->commentModel
+            ->where(['id' => $data['id']])
+            ->update($data);
+
+        session_put('success', 'Comment approved.');
+        redirect('comments/table');
     }
 }

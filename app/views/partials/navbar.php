@@ -34,6 +34,9 @@
                                 <a href="<?= route('authors/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
                                     Authors
                                 </a>
+                                <a href="<?= route('comments/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                                    Comments
+                                </a>
                             <?php endif ?>
                             <a href="<?= route('users/logout') ?>" class="block px-4 py-2 text-sm text-gray-700">
                                 Sign out

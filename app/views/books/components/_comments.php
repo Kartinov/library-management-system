@@ -33,13 +33,18 @@
         <!-- comments -->
         <div>
             <?php if (empty($data['comments'])) : ?>
-                <h4>There is no comments for this book</h4>
+                 <div class="bg-blue-200 border-blue-700 text-blue-800 font-semibold border-l-4 p-4 flex items-center mb-3 shadow-lg">
+
+                    <p>
+                        There is no comments for this book
+                    </p>
+                </div>
             <?php else : ?>
                 <?php foreach ($data['comments'] as $comment) : ?>
                     <div class="bg-white w-full rounded-lg shadow-xl sm:inline-block mb-5">
                         <div class="p-6">
-                            <p class="text-gray-600 font-bold">
-                                Dimche Kartinov
+                            <p class="text-gray-600 font-bold capitalize">
+                                <?= $comment->u_first_name . ' ' . $comment->u_first_name ?>
                             </p>
 
                             <p class="mt-3">
@@ -94,14 +99,14 @@
                 </div>
             <?php endif; ?>
 
-            <div class="bg-green-200 border-green-700 text-green-700 border-l-4 p-4 flex items-center" role="alert">
+            <div class="bg-green-200 border-green-700 text-green-700 border-l-4 p-4 flex items-center shadow-lg">
                 <div class="w-10 text-">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
                 <p>
-                    You have already commented on this book. To renew your comment you have to delete your old one. <a href="<?= route("comments/delete/{$data['commented']->id}") ?>" class="text-red-700 font-bold">Delete it</a>
+                    You have already commented on this book. To renew your comment you have to delete your old one. <a href="<?= route("comments/delete/{$data['commented']->id}/{$data['commented']->book_id}") ?>" class="text-red-700 font-bold">Delete it</a>
                 </p>
             </div>
         <?php endif; ?>
