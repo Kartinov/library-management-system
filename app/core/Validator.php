@@ -49,6 +49,15 @@ class Validator
         return $this->errors;
     }
 
+    public function validateCategoryForm()
+    {
+        $this->validateInputs();
+
+        $this->validateCategoryName();
+
+        return $this->errors;
+    }
+
     public function allFieldsRequired()
     {
         foreach ($this->data as $field) {
@@ -118,7 +127,7 @@ class Validator
 
         if (empty($val)) {
             $this->addError('title', 'title cannot be empty');
-        } else if (strlen($val) < 3 && strlen($val) > 64) {
+        } elseif (strlen($val) < 3 || strlen($val) > 64) {
             $this->addError('title', 'title must be 3-64 chars');
         }
     }
@@ -171,6 +180,17 @@ class Validator
 
         if (empty($val)) {
             $this->addError('author_id', 'Author cannot be empty');
+        }
+    }
+
+    public function validateCategoryName()
+    {
+        $val = trim($this->data['name']);
+
+        if (empty($val)) {
+            $this->addError('category', 'category name field cannot be empty');
+        } elseif (strlen($val) < 3 || strlen($val) > 64) {
+            $this->addError('category', 'category name must be 3-64 chars');
         }
     }
 

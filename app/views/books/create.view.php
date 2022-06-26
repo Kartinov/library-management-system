@@ -38,7 +38,8 @@
 
                                 <option value="">Choose author</option>
                                 <?php foreach ($data['authors'] as $author) : ?>
-                                    <option value="<?= $author->id; ?>" <?= $author->id == $oldAuthor ? 'selected' : ''; ?>>
+                                    <option value="<?= $author->id; ?>" 
+                                    <?= $author->id == $oldAuthor ? 'selected' : ''; ?>>
                                         <?= $author->first_name . ' ' . $author->last_name; ?>
                                     </option>
                                 <?php endforeach ?>

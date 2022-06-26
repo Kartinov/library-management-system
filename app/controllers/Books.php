@@ -9,10 +9,6 @@ class Books extends Controller
         $this->bookModel = $this->model('BookModel');
     }
 
-    public function index()
-    {
-    }
-
     /**
      * Shows a book
      * 

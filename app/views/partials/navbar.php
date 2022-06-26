@@ -28,6 +28,9 @@
                                 <a href="<?= route('books/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
                                     Books
                                 </a>
+                                <a href="<?= route('categories/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                                    Categories
+                                </a>
                             <?php endif ?>
                             <a href="<?= route('users/logout') ?>" class="block px-4 py-2 text-sm text-gray-700">
                                 Sign out
