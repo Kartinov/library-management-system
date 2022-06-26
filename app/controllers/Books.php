@@ -45,7 +45,38 @@ class Books extends Controller
 
         $book = $this->bookModel->get()[0];
 
-        $this->view('books/show', ['book' => $book]);
+        $authenticated = session_has('user') ? true : false;
+
+        $comments = null;
+        $commented = false;
+
+        if ($authenticated) {
+            $commentModel = $this->model('CommentModel');
+
+            $commented = $commentModel
+                ->where([
+                    'user_id' => session_get('user')->user_id,
+                    'book_id' => $bookId
+                ])
+                ->first();
+
+            $comments = $commentModel
+                ->clearWhere()
+                ->where([
+                    'is_approved' => 1,
+                    'book_id' => $bookId
+                ])
+                ->join('users', 'user_id', '=', 'authors.id')
+                ->get();
+        }
+
+        $this->view('books/show', [
+            'book' => $book,
+            'bookId' => $bookId,
+            'authenticated' => $authenticated,
+            'comments' => $comments,
+            'commented' => $commented
+        ]);
     }
 
 
