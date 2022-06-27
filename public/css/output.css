@@ -1072,6 +1072,14 @@ select {
   top: 5rem;
 }
 
+.left-9 {
+  left: 2.25rem;
+}
+
+.left-0 {
+  left: 0px;
+}
+
 .z-40 {
   z-index: 40;
 }
@@ -1082,6 +1090,10 @@ select {
 
 .z-50 {
   z-index: 50;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .col-span-3 {
@@ -1199,6 +1211,18 @@ select {
 
 .mr-3 {
   margin-right: 0.75rem;
+}
+
+.mr-10 {
+  margin-right: 2.5rem;
+}
+
+.mr-20 {
+  margin-right: 5rem;
+}
+
+.mr-12 {
+  margin-right: 3rem;
 }
 
 .block {
@@ -2202,6 +2226,16 @@ select {
   background-color: rgb(161 98 7 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-red-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+}
+
 .hover\:text-blue-700:hover {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
@@ -2412,6 +2446,10 @@ select {
 }
 
 @media (min-width: 768px) {
+  .md\:mr-10 {
+    margin-right: 2.5rem;
+  }
+
   .md\:flex-1 {
     flex: 1 1 0%;
   }
@@ -2433,11 +2471,25 @@ select {
     margin-right: calc(2.5rem * var(--tw-space-x-reverse));
     margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
+
+  .md\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .md\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 @media (min-width: 1024px) {
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:mr-10 {
+    margin-right: 2.5rem;
   }
 
   .lg\:block {

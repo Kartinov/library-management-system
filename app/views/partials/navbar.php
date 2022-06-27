@@ -22,23 +22,23 @@
                             </button>
                         </div>
 
-                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10" x-show="profileOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20" x-show="profileOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
 
                             <?php if (session_get('user')->role == 'admin') : ?>
-                                <a href="<?= route('books/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                                <a href="<?= route('books/table') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Books
                                 </a>
-                                <a href="<?= route('categories/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                                <a href="<?= route('categories/table') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Categories
                                 </a>
-                                <a href="<?= route('authors/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                                <a href="<?= route('authors/table') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Authors
                                 </a>
-                                <a href="<?= route('comments/table') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                                <a href="<?= route('comments/table') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Comments
                                 </a>
                             <?php endif ?>
-                            <a href="<?= route('users/logout') ?>" class="block px-4 py-2 text-sm text-gray-700">
+                            <a href="<?= route('users/logout') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 ">
                                 Sign out
                             </a>
                         </div>
