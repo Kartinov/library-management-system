@@ -4,6 +4,7 @@ $(function () {
     $('#notesDiv').on('click', '.editNoteBtn', editUserNote);
 
     renderUserNotes();
+    getAndPrintQuote();
 
     // Categories listener
     $('.category-select').on('click', filterAndRenderBooks);
@@ -12,6 +13,16 @@ $(function () {
 
     $('.category-checkbox').animate({ marginLeft: 0 }, 700); // show checkboxes
 });
+
+function getAndPrintQuote() {
+    const quoteText = $('#quote-text');
+
+    if (quoteText) {
+        const apiUrl = 'https://api.quotable.io/random';
+
+        $.get(apiUrl, data => quoteText.html(data.content));
+    }
+}
 
 function editUserNote() {
     const routeUrl = getRoute('notes/edit');
@@ -110,21 +121,22 @@ function renderUserNotes() {
     const bookId = $('#book_id').val();
     const notesDiv = $('#notesDiv');
 
-    notesDiv.empty(); //clear
+    if (bookId) {
+        notesDiv.empty(); //clear
 
-    $.ajax({
-        type: 'POST',
-        url: routeUrl,
-        data: {
-            action: 'fetchUserNotes',
-            bookId: bookId,
-        },
-        success: function (data) {
-            const notes = JSON.parse(data);
+        $.ajax({
+            type: 'POST',
+            url: routeUrl,
+            data: {
+                action: 'fetchUserNotes',
+                bookId: bookId,
+            },
+            success: function (data) {
+                const notes = JSON.parse(data);
 
-            if (notes.length) {
-                $.each(notes, function (index, note) {
-                    notesDiv.append(`
+                if (notes.length) {
+                    $.each(notes, function (index, note) {
+                        notesDiv.append(`
                         <div class="w-full flex flex-col justify-between bg-white rounded-lg border border-gray-400 mb-6 py-5 px-4 shadow">
                                 <div id="note-body-${note.id}" class="mb-6">
                                     <p class="text-gray-800 text-base note-text">
@@ -168,10 +180,11 @@ function renderUserNotes() {
                                 </div>
                             </div>
                      `);
-                });
-            }
-        },
-    });
+                    });
+                }
+            },
+        });
+    }
 }
 
 function filterAndRenderBooks() {
