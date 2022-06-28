@@ -28,6 +28,18 @@
                         <div class="p-5">
 
                             <div class="mb-3">
+                                <div id="error-empty-note" class="hidden w-full text-white bg-red-500 mb-3">
+                                    <div class="container flex items-center justify-between px-6 py-2 mx-auto">
+                                        <div class="flex">
+                                            <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                                <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"></path>
+                                            </svg>
+
+                                            <p class="mx-3">You can not insert an empty note.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <label class="text-gray-700" for="textarea_note">
                                     <textarea class="appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" id="textarea_note" placeholder="Enter your note" name="textarea_note" rows="2" cols="30"></textarea>
                                     <input type="hidden" id="book_id" value="<?= $data['book']->id ?>">
