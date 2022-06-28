@@ -33,7 +33,7 @@
         <!-- comments -->
         <div>
             <?php if (empty($data['comments'])) : ?>
-                 <div class="bg-blue-200 border-blue-700 text-blue-800 font-semibold border-l-4 p-4 flex items-center mb-3 shadow-lg">
+                <div class="bg-blue-200 border-blue-700 text-blue-800 font-semibold border-l-4 p-4 flex items-center mb-3 shadow-lg">
 
                     <p>
                         There is no comments for this book
@@ -61,13 +61,19 @@
             <form action="<?= route("comments/store/{$data['bookId']}") ?>" method="POST">
                 <div class="mb-3">
                     <?php if (session_has('errors')) : ?>
-                        <div class="p-3">
                             <?php foreach (session_once('errors') as $error) : ?>
-                                <p class="first-letter:uppercase text-red-500">
-                                    <?= $error ?>
-                                </p>
+                                <div class="w-full text-white bg-red-500">
+                                    <div class="flex items-center justify-between px-6 py-2 mx-auto">
+                                        <div class="flex">
+                                            <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                                <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"></path>
+                                            </svg>
+
+                                            <p class="ml-3"><?= $error ?></p>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endforeach ?>
-                        </div>
                     <?php endif ?>
                 </div>
                 <label class="text-gray-700 mb-3 block" for="comment_text">Add a comment:</label>
