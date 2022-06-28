@@ -1,17 +1,17 @@
 $(function () {
-    // categories checkboxes event listener
-    $('.category-select').on('click', filterAndRenderBooks);
-
-    // notes event listeners
     $('#createNoteBtn').on('click', addUserNote);
     $('#notesDiv').on('click', '.deleteNoteBtn', deleteUserNote);
     $('#notesDiv').on('click', '.editNoteBtn', editUserNote);
 
-    filterAndRenderBooks(); // on homepage visit render books
-
     renderUserNotes();
-
     getAndPrintQuote();
+
+    // Categories listener
+    $('.category-select').on('click', filterAndRenderBooks);
+
+    filterAndRenderBooks(); // on page visit render books
+
+    $('.category-checkbox').animate({ marginLeft: 0 }, 700); // show checkboxes
 });
 
 function getAndPrintQuote() {
@@ -188,37 +188,26 @@ function renderUserNotes() {
 }
 
 function filterAndRenderBooks() {
-    const checkedCategories = getCheckedCategories();
+    const routeUrl = getRoute('books/fetchbooks');
 
-    if (checkedCategories) {
-        $('.category-checkbox').animate({ marginLeft: 0 }, 700); // show checkboxes
+    let checkedCategories = getCheckedCategories();
 
-        const routeUrl = getRoute('books/fetchbooks');
-
-        $.ajax({
-            type: 'POST',
-            url: routeUrl,
-            data: {
-                action: 'fetchBooks',
-                checkedCategories: checkedCategories,
-            },
-            success: data => renderBooks(JSON.parse(data)),
-        });
-    }
+    $.ajax({
+        type: 'POST',
+        url: routeUrl,
+        data: { action: 'fetchBooks', checkedCategories: checkedCategories },
+        success: data => renderBooks(JSON.parse(data)),
+    });
 }
 
 function getCheckedCategories() {
-    if ($('.category').is(':visible')) {
-        let filter = [];
+    let filter = [];
 
-        $('.category:checked').each(function () {
-            filter.push($(this).val());
-        });
+    $('.category:checked').each(function () {
+        filter.push($(this).val());
+    });
 
-        return filter;
-    }
-
-    return false;
+    return filter;
 }
 
 function renderBooks(booksData) {
@@ -229,25 +218,28 @@ function renderBooks(booksData) {
     $.each(booksData, function (index, book) {
         let bookHtml = `
             <a href="${getRoute('./books/show/' + book.id)}" 
-            class="book-card opacity-0 overflow-hidden bg-white rounded-lg shadow-xl duration-300 ease-in-out transition-transform transform hover:-translate-y-2">
-                <img class="object-cover object-center w-full h-56" 
-                    src="${book.image_url}" alt="${book.title}">
-                
-                <div class="p-2 bg-gray-900">
-                    <h1 class="text-lg font-semibold text-white first-letter:capitalize">
-                        ${book.c_name}
-                    </h1>
-                </div>
+            class="book-card opacity-0 flex flex-col items-center justify-center w-full max-w-2xl mx-auto duration-300 ease-in-out transition-transform transform hover:-translate-y-2">
+                      <img class="object-cover w-full rounded-md h-64 xl:h-60" src="${
+                          book.image_url
+                      }" alt="${book.title}">
 
-                <div class="p-2">
-                    <h1 class="text-xl font-semibold text-gray-800 mb-3">
-                        ${book.title}
-                    </h1>
-                    <p class="text-sm font-medium tracking-widest text-gray-500 uppercase">
-                        ${book.a_first_name} ${book.a_last_name}
-                    </p>
-                </div>
-            </a>
+                      <div class="w-full mt-2">
+                          <h5 class="text-lg font-semibold text-grey-700 h-20">${
+                              book.title
+                          }</h5>
+                          <div class="pt-2 mt-2 border-t-2 border-indigo-100">
+                              <p class="text-sm font-medium tracking-widest text-gray-500 uppercase">${
+                                  book.a_first_name
+                              } ${book.a_last_name}</p>
+                          </div>
+                      </div>
+
+                      <div class="flex justify-end w-full mt-3">
+                          <p class="text-lg font-medium text-white bg-indigo-600 px-4 py-1 rounded-l-lg">${
+                              book.c_name
+                          }</p>
+                      </div>
+                  </a>
         `;
 
         booksWrapperDiv.append(bookHtml);
@@ -256,7 +248,7 @@ function renderBooks(booksData) {
             {
                 opacity: 1,
             },
-            600
+            700
         );
     });
 }
