@@ -6,7 +6,14 @@ class Comments extends Controller
 
     public function __construct()
     {
+        adminOnly();
+
         $this->commentModel = $this->model('CommentModel');
+    }
+
+    public function index()
+    {
+        redirect('comments/table');
     }
 
     public function store($bookId)

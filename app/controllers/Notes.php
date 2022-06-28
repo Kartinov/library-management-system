@@ -11,6 +11,7 @@ class Notes extends Controller
 
     public function store()
     {
+        postOnly();
 
         if (isset($_POST['action']) && $_POST['action'] == 'storeUserNote') {
 

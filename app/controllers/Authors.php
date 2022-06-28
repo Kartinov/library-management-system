@@ -6,13 +6,17 @@ class Authors extends Controller
 
     public function __construct()
     {
+        adminOnly();
+
         $this->authorModel = $this->model('AuthorModel');
+    }
+
+    public function index() {
+        redirect('authors/table');
     }
 
     public function table()
     {
-        adminOnly();
-
         $authors = $this->authorModel->get();
 
         $this->view('authors/table', [

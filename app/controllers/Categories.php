@@ -9,6 +9,11 @@ class Categories extends Controller
         $this->categoryModel = $this->model('CategoryModel');
     }
 
+    public function index()
+    {
+        redirect('categories/table');
+    }
+
     public function table()
     {
         adminOnly();
