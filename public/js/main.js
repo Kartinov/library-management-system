@@ -1,17 +1,17 @@
 $(function () {
+    // categories checkboxes event listener
+    $('.category-select').on('click', filterAndRenderBooks);
+
+    // notes event listeners
     $('#createNoteBtn').on('click', addUserNote);
     $('#notesDiv').on('click', '.deleteNoteBtn', deleteUserNote);
     $('#notesDiv').on('click', '.editNoteBtn', editUserNote);
 
+    filterAndRenderBooks(); // on homepage visit render books
+
     renderUserNotes();
+
     getAndPrintQuote();
-
-    // Categories listener
-    $('.category-select').on('click', filterAndRenderBooks);
-
-    filterAndRenderBooks(); // on page visit render books
-
-    $('.category-checkbox').animate({ marginLeft: 0 }, 700); // show checkboxes
 });
 
 function getAndPrintQuote() {
@@ -188,26 +188,37 @@ function renderUserNotes() {
 }
 
 function filterAndRenderBooks() {
-    const routeUrl = getRoute('books/fetchbooks');
+    const checkedCategories = getCheckedCategories();
 
-    let checkedCategories = getCheckedCategories();
+    if (checkedCategories) {
+        $('.category-checkbox').animate({ marginLeft: 0 }, 700); // show checkboxes
 
-    $.ajax({
-        type: 'POST',
-        url: routeUrl,
-        data: { action: 'fetchBooks', checkedCategories: checkedCategories },
-        success: data => renderBooks(JSON.parse(data)),
-    });
+        const routeUrl = getRoute('books/fetchbooks');
+
+        $.ajax({
+            type: 'POST',
+            url: routeUrl,
+            data: {
+                action: 'fetchBooks',
+                checkedCategories: checkedCategories,
+            },
+            success: data => renderBooks(JSON.parse(data)),
+        });
+    }
 }
 
 function getCheckedCategories() {
-    let filter = [];
+    if ($('.category').is(':visible')) {
+        let filter = [];
 
-    $('.category:checked').each(function () {
-        filter.push($(this).val());
-    });
+        $('.category:checked').each(function () {
+            filter.push($(this).val());
+        });
 
-    return filter;
+        return filter;
+    }
+
+    return false;
 }
 
 function renderBooks(booksData) {
