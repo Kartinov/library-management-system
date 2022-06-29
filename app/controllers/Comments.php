@@ -6,8 +6,6 @@ class Comments extends Controller
 
     public function __construct()
     {
-        adminOnly();
-
         $this->commentModel = $this->model('CommentModel');
     }
 
@@ -60,6 +58,8 @@ class Comments extends Controller
 
     public function table()
     {
+        adminOnly();
+
         $comments = $this->commentModel
             ->selectRaw('
             comments.*,
@@ -80,6 +80,8 @@ class Comments extends Controller
 
     public function approve($commentId)
     {
+        adminOnly();
+
         $data = [
             'id' => $commentId,
             'is_approved' => 1
