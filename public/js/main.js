@@ -206,10 +206,17 @@ function filterAndRenderBooks() {
 
 function getCheckedCategories() {
     let filter = [];
+    let windowWidth = $(window).width();
 
-    $('.category:checked').each(function () {
-        filter.push($(this).val());
-    });
+    if (windowWidth < 1024) {
+        $('.category-mobile:checked').each(function () {
+            filter.push($(this).val());
+        });
+    } else {
+        $('.category:checked').each(function () {
+            filter.push($(this).val());
+        });
+    }
 
     return filter;
 }

@@ -32,7 +32,7 @@
                                 <?php foreach ($data['categories'] as $category) : ?>
                                     <div class="category-checkbox -ml-96">
                                         <label class="flex items-center ml-3 capitalize text-sm text-gray-600">
-                                            <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 category-select category" value="<?= $category->id ?>">
+                                            <input type="checkbox" class="mr-2 h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500 category-select category-mobile" value="<?= $category->id ?>">
                                             <?= $category->name ?>
                                         </label>
                                     </div>
