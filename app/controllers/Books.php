@@ -121,6 +121,8 @@ class Books extends Controller
 
     public function table()
     {
+        adminOnly();
+    
         $books = $this->bookModel
             ->selectRaw(
                 'books.*,
@@ -138,6 +140,8 @@ class Books extends Controller
 
     public function create($bookId = null)
     {
+        adminOnly();
+
         $categories = $this->model('CategoryModel')
             ->where(['is_archived' => 0])
             ->get();
@@ -222,6 +226,8 @@ class Books extends Controller
 
     public function delete($bookId)
     {
+        adminOnly();
+
         $this->bookModel->delete('id', $bookId);
 
         session_put('success', 'Book deleted.');

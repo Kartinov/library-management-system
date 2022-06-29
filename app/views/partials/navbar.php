@@ -1,16 +1,16 @@
 <div class="relative bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div class="flex flex-col sm:flex-row justify-center sm:justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
 
             <!-- LOGO -->
-            <div class="flex justify-start lg:w-0 lg:flex-1">
+            <div class="flex justify-start lg:w-0 lg:flex-1 mb-3 sm:mb-0">
                 <a href="<?= route() ?>">
-                    <h1 class="text-xl font-bold">BRAINSTER<span class="font-normal">LIBRARY</span>
+                    <h1 class="text-xl font-bold">
+                        BRAINSTER<span class="font-normal">LIBRARY</span>
                     </h1>
                 </a>
             </div>
 
-            <!-- Sign Up / Sign In Buttons -->
             <div class="flex items-center justify-end md:flex-1 lg:w-0">
 
                 <?php if (session_has('user')) : ?>
@@ -23,7 +23,9 @@
                         </div>
 
                         <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20" x-show="profileOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
-
+                            <a href="<?= route('home/index') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                Home
+                            </a>
                             <?php if (session_get('user')->role == 'admin') : ?>
                                 <a href="<?= route('books/table') ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Books

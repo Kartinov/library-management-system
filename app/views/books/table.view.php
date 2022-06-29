@@ -106,7 +106,8 @@
                                     </a>
                                 </td>
                                 <td class="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                                    <button @click="deleteModal = true" class="flex items-center px-2 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+
+                                    <button @click="deleteModal = true" data-book-id="<?= $book->id ?>" class="deleteBookBtn flex items-center px-2 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
@@ -142,7 +143,7 @@
                             All the users comments and notes about this book will be deleted
                         </p>
                         <div class="flex items-center justify-between gap-4 w-full mt-8">
-                            <a href="<?= route("books/delete/{$book->id}") ?>" class="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                            <a id="deleteBookBtn" href="#" class="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
                                 Delete
                             </a>
                             <button @click="deleteModal = false" type="button" class="py-2 px-4  bg-white hover:bg-gray-100 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-indigo-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
@@ -158,3 +159,17 @@
     </div>
 
 </div>
+
+<script>
+    const deleteRouteUrl = "<?= route('books/delete'); ?>"
+    const deleteBookBtn = document.querySelectorAll('.deleteBookBtn');
+    const deleteBookBtnModal = document.getElementById('deleteBookBtn');
+
+    deleteBookBtn.forEach(element => {
+        element.addEventListener('click', function() {
+            const bookId = this.getAttribute('data-book-id')
+
+            deleteBookBtnModal.href = deleteRouteUrl + '/' + bookId
+        });
+    });
+</script>
