@@ -17,7 +17,7 @@
         <?php endif ?>
 
         <form action="<?= $data['action'] == 'update' ? route('books/update') : route('books/store') ?>" method="POST">
-            <div class="shadow overflow-hidden sm:rounded-md">
+            <div class="shadow-xl overflow-hidden sm:rounded-md">
                 <div class="px-4 py-5 bg-white sm:p-6">
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6">

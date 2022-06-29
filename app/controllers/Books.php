@@ -122,7 +122,7 @@ class Books extends Controller
     public function table()
     {
         adminOnly();
-    
+
         $books = $this->bookModel
             ->selectRaw(
                 'books.*,
@@ -269,16 +269,17 @@ class Books extends Controller
             }
         }
 
+        $bookId = session_once('bookId');
+        
         if (!empty($errors)) {
             session_put('errors', $errors);
             session_put('old', $_POST);
-
-            redirect('books/create');
+            
+            redirect("books/create/{$bookId}");
         }
-
+        
         $data = $_POST;
-
-        $data['id'] = session_once('bookId');
+        $data['id'] = $bookId;
 
         $updated = $this->bookModel
             ->where(['id' => $data['id']])

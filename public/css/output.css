@@ -1447,6 +1447,10 @@ select {
   flex-shrink: 0;
 }
 
+.table-auto {
+  table-layout: auto;
+}
+
 .origin-top-right {
   transform-origin: top right;
 }
@@ -1592,8 +1596,16 @@ select {
   align-self: flex-end;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-y-auto {
@@ -2667,6 +2679,10 @@ select {
     padding-bottom: 0px;
   }
 
+  .sm\:text-left {
+    text-align: left;
+  }
+
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -2744,6 +2760,10 @@ select {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:overflow-visible {
+    overflow: visible;
   }
 
   .lg\:px-8 {
