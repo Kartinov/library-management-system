@@ -1,6 +1,6 @@
 <div class="relative bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex flex-col sm:flex-row justify-center sm:justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div class="flex flex-col sm:flex-row justify-center sm:justify-between items-center border-b-2 border-gray-100 py-6">
 
             <!-- LOGO -->
             <div class="flex justify-start lg:w-0 lg:flex-1 mb-3 sm:mb-0">
@@ -10,6 +10,17 @@
                     </h1>
                 </a>
             </div>
+
+            <?php if (!session_has('user')) : ?>
+                <div class="text-center flex flex-1 justify-center mb-3 sm:mb-0">
+                    <a href="<?= route() ?>" class="flex items-center text-gray-600 hover:text-gray-800 border-b-transparent border-b-2 hover:border-b-indigo-600 transition-border duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                        </svg>
+                        <span class="text-lg">Home</span>
+                    </a>
+                </div>
+            <?php endif ?>
 
             <div class="flex items-center justify-end md:flex-1 lg:w-0">
 
