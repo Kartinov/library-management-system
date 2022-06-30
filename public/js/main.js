@@ -12,7 +12,19 @@ $(function () {
     fetchAndPrintQuote();
 
     renderUserNotes();
+
+    scrollTopBtnInit();
 });
+
+function scrollTopBtnInit() {
+       const topBtn = $('#topButton');
+
+       $(window).scroll(function () {
+           $(this).scrollTop() > 40 ? topBtn.fadeIn() : topBtn.fadeOut(300);
+       });
+
+       topBtn.on('click', () => $('html, body').animate({ scrollTop: 0 }, 400));
+}
 
 function fetchAndPrintQuote() {
     const quoteText = $('#quote-text');

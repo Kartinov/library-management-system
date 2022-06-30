@@ -11,7 +11,8 @@ class Authors extends Controller
         $this->authorModel = $this->model('AuthorModel');
     }
 
-    public function index() {
+    public function index()
+    {
         redirect('authors/table');
     }
 
@@ -135,16 +136,18 @@ class Authors extends Controller
 
         $errors = $validation->validateAuthorForm();
 
+        $authorId = session_once('authorId');
+
         if (!empty($errors)) {
             session_put('errors', $errors);
             session_put('old', $_POST);
 
-            redirect('authors/create');
+            redirect("authors/create/{$authorId}");
         }
 
         $data = $_POST;
 
-        $data['id'] = session_once('authorId');
+        $data['id'] = $authorId;
 
         $updated = $this->authorModel
             ->where(['id' => $data['id']])

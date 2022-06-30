@@ -1,11 +1,12 @@
 <?php
-
 class Categories extends Controller
 {
     private CategoryModel $categoryModel;
 
     public function __construct()
     {
+        adminOnly();
+
         $this->categoryModel = $this->model('CategoryModel');
     }
 
@@ -124,16 +125,18 @@ class Categories extends Controller
 
         $errors = $validation->validateCategoryForm();
 
+        $categoryId = session_once('categoryId');
+
         if (!empty($errors)) {
             session_put('errors', $errors);
             session_put('old', $_POST);
 
-            redirect('categories/create');
+            redirect("categories/create/{$categoryId}");
         }
 
         $data = $_POST;
 
-        $data['id'] = session_once('categoryId');
+        $data['id'] = $categoryId;
 
         $updated = $this->categoryModel
             ->where(['id' => $data['id']])
