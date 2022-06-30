@@ -3,11 +3,11 @@
 $config = [
     'database' =>
     [
-        'name' => 'brainster-library',
-        'username' => 'root',
+        'name' => '',
+        'username' => '',
         'password' => '',
-        'connection' => 'mysql:host=127.0.0.1',
+        'connection' => 'mysql:host=',
         'options' => []
     ],
-    'APP_URL' => 'http://localhost/Brainster/Brainster_Projects/brainsterprojects_dimchekartinovfs6'
+    'APP_URL' => ''
 ];
