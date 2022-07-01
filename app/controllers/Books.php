@@ -97,7 +97,7 @@ class Books extends Controller
     {
         postOnly();
 
-        if (isset($_POST['action'])) {
+        if (isset($_POST['action']) && $_POST['action'] == 'fetchBooks') {
             $this->bookModel
                 ->selectRaw(
                     'books.*,
@@ -107,7 +107,8 @@ class Books extends Controller
                 '
                 )
                 ->join('authors', 'books.author_id', '=', 'authors.id')
-                ->join('categories', 'books.categorie_id', '=', 'categories.id');
+                ->join('categories', 'books.categorie_id', '=', 'categories.id')
+                ->orderBy('updated_at', 'DESC');
 
             if (isset($_POST['checkedCategories'])) {
                 $this->bookModel->whereIn([
@@ -270,14 +271,14 @@ class Books extends Controller
         }
 
         $bookId = session_once('bookId');
-        
+
         if (!empty($errors)) {
             session_put('errors', $errors);
             session_put('old', $_POST);
-            
+
             redirect("books/create/{$bookId}");
         }
-        
+
         $data = $_POST;
         $data['id'] = $bookId;
 

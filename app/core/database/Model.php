@@ -10,7 +10,9 @@ abstract class Model extends Connection
 
     protected array $whereIn = [];
 
-    protected array  $joins = [];
+    protected array $joins = [];
+
+    protected array $orderBy = [];
 
     protected string $table;
 
@@ -145,6 +147,13 @@ abstract class Model extends Connection
         return $this;
     }
 
+    public function orderBy($column, $order = 'ASC')
+    {
+        $this->orderBy[] = [strtolower($column), $order];
+
+        return $this;
+    }
+
     public function selectRaw(string $raw)
     {
         $this->selectRaw = $raw;
@@ -232,6 +241,10 @@ abstract class Model extends Connection
             $selectedCategories = implode(',', $this->whereIn[0][1]);
 
             $query .= "WHERE {$this->whereIn[0][0]} IN ({$selectedCategories})";
+        }
+
+        if (!empty($this->orderBy)) {
+            $query .= " ORDER BY {$this->orderBy[0][0]} {$this->orderBy[0][1]}";
         }
 
         $query .= ';';

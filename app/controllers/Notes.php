@@ -39,6 +39,7 @@ class Notes extends Controller
                     'user_id' => session_get('user')->user_id,
                     'book_id' => $_POST['bookId']
                 ])
+                ->orderBy('updated_at', 'DESC')
                 ->get();
 
             echo json_encode($notes);
